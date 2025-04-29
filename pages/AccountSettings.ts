@@ -13,4 +13,4 @@ export class AccountSettings {
         await this.page.goto('/account-settings');
     }
     
-    
+}
