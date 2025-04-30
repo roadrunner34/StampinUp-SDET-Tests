@@ -21,6 +21,7 @@ export class AccountSettings {
     }
 
     async clickToAccountsettings(){
+        await this.accountName.click();
         await this.accountSettings.click();
     }
     
