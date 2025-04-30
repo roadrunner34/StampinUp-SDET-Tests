@@ -22,8 +22,8 @@ export class HomePage {
         this.firstNameInput = this.page.getByTestId('reg-first-name');
         this.lastNameInput = this.page.getByTestId('reg-last-name');
         this.emailInput = this.page.getByTestId('reg-email');
-        this.passwordInput = this.page.getByTestId('reg-password');
-        this.passwordConfirmationInput = this.page.getByTestId('reg-password-confirmation');
+        this.passwordInput = this.page.getByTestId('reg-password').getByText('Password', { exact: true });
+        this.passwordConfirmationInput = this.page.getByTestId('reg-password-confirmation').getByText('Confirm Password', { exact: true });
         this.submitButton = this.page.getByTestId('reg-submit');
         this.emailLogin = this.page.getByTestId('auth-email');
         this.passwordLogin = this.page.getByTestId('form-auth').getByText('Password', { exact: true });

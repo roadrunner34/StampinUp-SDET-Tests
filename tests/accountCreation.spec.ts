@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/homepage';
 import { AccountSettings } from '../pages/AccountSettings';
 import dotenv from 'dotenv';
+import { logTestAccount } from '../utils/accountLogger';
 
 dotenv.config();
 
@@ -9,9 +10,13 @@ if (!process.env.CURRENTUSEREMAIL || !process.env.CURRENTUSERPASSWORD) {
     throw new Error('Missing required environment variables: CURRENTUSEREMAIL and CURRENTUSERPASSWORD');
 }
 
-//New account email and password
+//Current account email and password
 export const testEmail = process.env.CURRENTUSEREMAIL;
 export const testPassword = process.env.CURRENTUSERPASSWORD;
+
+//New Random account email and password
+export const newEmail = Math.random().toString(36).substring(2, 15) + '@fakeemail.com';
+export const newPassword = Math.random().toString(36).substring(2, 15);
 
 test.describe('Home Page', () => {
 
@@ -25,15 +30,17 @@ test.describe('Home Page', () => {
         await expect(page.getByTestId('auth-submit')).toBeVisible();
         
     });
-/*
+
     test('Create new Account and fill out information', async ({ page }) => {
         const homePage = new HomePage(page);
         await homePage.clickSignInButton();
         await homePage.clickCreateAccountButton();
-        await homePage.fillOutNewAccountForm('Tester', Math.random().toString(36).substring(2, 15), testEmail, testPassword);
-
+        await homePage.fillOutNewAccountForm('Tester', 'Tester', newEmail, newPassword);
+        
+        // Log the newly created account credentials
+        logTestAccount(newEmail, newPassword);
     });
-*/
+
 
     test('Sign in to newly created account', async ({ page }) => {
         const homePage = new HomePage(page);
