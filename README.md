@@ -20,3 +20,4 @@ Deadline: Please submit your completed assignment by Friday May 2nd.
 Notes:
 Used Temp-mail.org to create a new email address for the test cases.
 https://temp-mail.org/en/
+Results deployed to GitHub Pages: https://roadrunner34.github.io/StampinUp-SDET-Tests/

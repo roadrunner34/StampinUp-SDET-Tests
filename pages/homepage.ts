@@ -1,15 +1,19 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, Locator } from '@playwright/test';
 
 export class HomePage {
     private readonly page: Page;
-    private readonly signInButton;
-    private readonly createAccountButton;
-    firstNameInput: any;
-    lastNameInput: any;
-    emailInput: any;
-    passwordInput: any;
-    passwordConfirmationInput: any;
-    submitButton: any;
+    private readonly signInButton: Locator;
+    private readonly createAccountButton: Locator;
+    firstNameInput: Locator;
+    lastNameInput: Locator;
+    emailInput: Locator;
+    emailLogin: Locator;
+    passwordInput: Locator;
+    passwordConfirmationInput: Locator;
+    submitButton: Locator;
+    passwordLogin: Locator;
+    submitLogin: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +25,9 @@ export class HomePage {
         this.passwordInput = this.page.getByTestId('reg-password');
         this.passwordConfirmationInput = this.page.getByTestId('reg-password-confirmation');
         this.submitButton = this.page.getByTestId('reg-submit');
+        this.emailLogin = this.page.getByTestId('auth-email');
+        this.passwordLogin = this.page.getByTestId('form-auth').getByText('Password', { exact: true });
+        this.submitLogin = this.page.getByTestId('auth-submit');
     }
 
     async goto(){
@@ -44,9 +51,9 @@ export class HomePage {
         await this.submitButton.click();
     }
 
-    async fillOutExistingAccountForm(email: string, password: string) {
-        await this.emailInput.fill(email);
-        await this.passwordInput.fill(password);
-        await this.submitButton.click();
+    async loginToAccount(email: string, password: string) {
+        await this.emailLogin.fill(email);
+        await this.passwordLogin.fill(password);
+        await this.submitLogin.click();
     }
 }

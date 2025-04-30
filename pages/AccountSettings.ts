@@ -10,7 +10,7 @@ export class AccountSettings {
     }
 
     async goto() {
-        await this.page.goto('/account-settings');
+        await this.page.goto('/account/settings');
     }
     
 }
