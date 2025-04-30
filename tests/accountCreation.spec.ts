@@ -5,13 +5,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-if (!process.env.currentUserEmail || !process.env.currentUserPassword) {
-    throw new Error('Missing required environment variables: currentUserEmail and currentUserPassword');
+if (!process.env.CURRENTUSEREMAIL || !process.env.CURRENTUSERPASSWORD) {
+    throw new Error('Missing required environment variables: CURRENTUSEREMAIL and CURRENTUSERPASSWORD');
 }
 
 //New account email and password
-export const testEmail = process.env.currentUserEmail;
-export const testPassword = process.env.currentUserPassword;
+export const testEmail = process.env.CURRENTUSEREMAIL;
+export const testPassword = process.env.CURRENTUSERPASSWORD;
 
 test.describe('Home Page', () => {
 

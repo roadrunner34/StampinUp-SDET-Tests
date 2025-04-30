@@ -1,10 +1,18 @@
 import { test, expect } from '@playwright/test';
 import { AccountSettings } from '../pages/AccountSettings';
 import { HomePage } from '../pages/homepage';
-import { testEmail, testPassword } from './accountCreation.spec';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+if (!process.env.CURRENTUSEREMAIL || !process.env.CURRENTUSERPASSWORD) {
+    throw new Error('Missing required environment variables: CURRENTUSEREMAIL and CURRENTUSERPASSWORD');
+}
+//New account email and password
+export const testEmail = process.env.CURRENTUSEREMAIL;
+export const testPassword = process.env.CURRENTUSERPASSWORD;
+
+
 
 test.describe('Account Settings', () => {
 
