@@ -37,7 +37,9 @@ test.describe('Home Page', () => {
 
     test('Sign in to newly created account', async ({ page }) => {
         const homePage = new HomePage(page);
+        const accountSettings = new AccountSettings(page);
         await homePage.clickSignInButton();
         await homePage.loginToAccount(testEmail, testPassword);
+        await accountSettings.clickToAccountsettings();
     });
 });

@@ -8,7 +8,7 @@ dotenv.config();
 if (!process.env.CURRENTUSEREMAIL || !process.env.CURRENTUSERPASSWORD) {
     throw new Error('Missing required environment variables: CURRENTUSEREMAIL and CURRENTUSERPASSWORD');
 }
-//New account email and password
+//Current account email and password
 export const testEmail = process.env.CURRENTUSEREMAIL;
 export const testPassword = process.env.CURRENTUSERPASSWORD;
 
