@@ -2,6 +2,9 @@ import { test, expect } from '@playwright/test';
 import { AccountSettings } from '../pages/AccountSettings';
 import { HomePage } from '../pages/homepage';
 import { testEmail, testPassword } from './accountCreation.spec';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 test.describe('Account Settings', () => {
 

@@ -2,7 +2,7 @@ The following are bugs and notes found while testing and creating this test suit
 
 ## Bugs found while testing
 1. On the sign in popup, you have 2 data-testid for the password field, thereby making it harder to use data-testid to fill out the password field.  Search for "auth-password". 
-2. 
+2. All the data-testid's for the different sections under the account name are the same, "account-link"
 
 
 ## Notes

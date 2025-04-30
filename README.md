@@ -1,5 +1,40 @@
 # StampinUp SDET Tests
- For Technical Interview
+
+This repository contains automated tests for the StampinUp website.
+
+## Setup Instructions
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up your environment variables:
+   ```bash
+   npm run setup
+   ```
+   This will create a `.env` file in your project root. Please fill in the required variables.
+
+4. Run the tests:
+   ```bash
+   npm test
+   ```
+
+## Environment Variables
+
+The following environment variables are required:
+
+- Add your required environment variables here
+
+## Test Configuration
+
+Tests are configured to run in multiple browsers (Chrome, Firefox, and Safari) by default. You can modify the configuration in `playwright.config.ts`.
+
+## Contributing
+
+Please follow the existing code style and add appropriate tests for new features.
+
+For Technical Interview
 Email Instructions:
 
 # Assignment Details:

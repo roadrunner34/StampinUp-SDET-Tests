@@ -1,17 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/homepage';
 import { AccountSettings } from '../pages/AccountSettings';
+import dotenv from 'dotenv';
 
-/*
-Normally this would not be hardcoded like this for a test suite. 
-We would use a .env file to store hardcoded values, or use a random string generator for the email and password.
-But for the purposes of this job application, I am going this route.  
-*/
+dotenv.config();
 
+if (!process.env.currentUserEmail || !process.env.currentUserPassword) {
+    throw new Error('Missing required environment variables: currentUserEmail and currentUserPassword');
+}
 
 //New account email and password
-export const testEmail = 'sapoli5013@hedotu.com';
-export const testPassword = 'pg4X@h#r&b@R';
+export const testEmail = process.env.currentUserEmail;
+export const testPassword = process.env.currentUserPassword;
 
 test.describe('Home Page', () => {
 
