@@ -66,4 +66,9 @@ test.describe('Home Page', () => {
         
     });
 
+
+    /*Additional Tests Cases
+    Should also have tests cases for:
+    1. Invalid Account creation
+    */
 });
