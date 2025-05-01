@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { logTestAccount } from '../utils/accountLogger';
 
 export class AccountSettings {
 
@@ -22,6 +23,15 @@ export class AccountSettings {
     savedCityStateZipCode: Locator;
 
     savedPhoneNumber: Locator;
+    editContactInfoButton: Locator;
+    contactFirstName: Locator;
+    contactLastName: Locator;
+    contactEmail: Locator;
+    contactPhone: Locator;
+    contactSaveButton: Locator;
+    contactCancelButton: Locator;
+    birthdayDatePicker: Locator;
+    contactCards: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -29,6 +39,17 @@ export class AccountSettings {
         this.accountSettings = this.page.getByRole('menuitem', { name: 'Account Settings' });
         this.addresses = this.page.getByRole('link', { name: 'Addresses' });
         this.paymentMethods = this.page.getByRole('menuitem', { name: 'Payment' });
+
+        //Account Settings Fields
+        this.editContactInfoButton = this.page.getByTestId('account-card-contact').getByTestId('edit-contact-setting');
+        this.contactFirstName = this.page.getByTestId('account-card-firstName');
+        this.contactLastName = this.page.getByTestId('account-card-lastName');
+        this.contactEmail = this.page.getByTestId('account-card-email');
+        this.contactPhone = this.page.getByTestId('account-card-phone');
+        this.contactSaveButton = this.page.getByTestId('save-changes');
+        this.contactCancelButton = this.page.getByTestId('cancel-changes');
+        this.birthdayDatePicker = this.page.getByTestId('birthday-date-picker');
+        this.contactCards = this.page.getByTestId('account-card-contact')
 
         //Address fields
         this.shippingFirstName = this.page.getByTestId('address-field-first-name');
@@ -82,5 +103,23 @@ export class AccountSettings {
     async verifyAddressSaved(addressLine1: string, cityStateZipcode: string){
         await expect(this.savedAddressLine1).toHaveText(addressLine1);
         await expect(this.savedCityStateZipCode).toContainText(cityStateZipcode);
+    }
+
+    async editContactInfo(firstName: string, lastName: string, email: string, phone: string){
+        await this.editContactInfoButton.click();
+        await this.contactFirstName.fill(firstName);
+        await this.contactLastName.fill(lastName);
+        await this.contactEmail.fill(email);
+        await this.contactPhone.fill(phone);
+        await this.contactSaveButton.click();
+        logTestAccount(email);
+
+    }
+
+    async verifyContactInfoSaved(firstName: string, lastName: string){
+        await expect(this.contactCards.getByText(firstName)).toBeVisible();
+        await expect(this.contactCards.getByText(lastName)).toBeVisible();
+        // TODO: Need better locators to do email and phone checks 
+        // await expect(this.contactEmail).toHaveText(email);
     }
 }

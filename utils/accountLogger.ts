@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export function logTestAccount(email: string, password: string) {
+export function logTestAccount(email: string) {
     const logMessage = `Test Account Created:\nEmail: ${email}\nCreated at: ${new Date().toISOString()}\n---\n`;
     
     fs.appendFileSync(

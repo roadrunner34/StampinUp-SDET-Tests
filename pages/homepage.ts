@@ -54,7 +54,7 @@ export class HomePage {
         await this.passwordInput.fill(password);
         await this.passwordConfirmationInput.fill(password);
         await this.submitButton.click();
-        logTestAccount(email, password);
+        logTestAccount(email);
         await this.maybeLaterButton.click();
         await this.closeOptOutRewardsModal.click();
 

@@ -14,9 +14,6 @@ if (!process.env.CURRENTUSEREMAIL || !process.env.CURRENTUSERPASSWORD) {
 export const testEmail = process.env.CURRENTUSEREMAIL;
 export const testPassword = process.env.CURRENTUSERPASSWORD;
 
-//New Random account email and password
-export const newEmail = Math.random().toString(36).substring(2, 15) + '@fakeemail.com';
-export const newPassword = Math.random().toString(36).substring(2, 15);
 //Random Address information
 const streetAddress = faker.location.streetAddress();
 const city = faker.location.city();
@@ -29,33 +26,44 @@ test.describe('Home Page', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
     });
-/*
-    test('should have a sign in button', async ({ page }) => {
-        const homePage = new HomePage(page);
-        await homePage.clickSignInButton();
-        await expect(page.getByTestId('auth-submit')).toBeVisible();
-        
-    });
-*/
-    test('Create new Account and fill out information', async ({ page }) => {
+
+    test('Create new Account and fill out Address information', async ({ page }) => {
         const homePage = new HomePage(page);
         const accountSettings = new AccountSettings(page);
         await homePage.clickSignInButton();
         await homePage.clickCreateAccountButton();
-        await homePage.fillOutNewAccountForm('Tester', 'Tester', newEmail, newPassword);
+        await homePage.fillOutNewAccountForm('Tester', 'Tester', faker.internet.email({provider: 'fakeemail.com'}), faker.internet.password());
         
         await accountSettings.clickToAccountsettings();
         await accountSettings.clickToAddresses();
+
+        const streetAddress = faker.location.streetAddress();
+        const city = faker.location.city();
+        const state = 'Utah';
+        const zip = '84117';
+        const phoneNumber = faker.phone.number();
+
         await accountSettings.fillOutShippingInfo('Tester', 'Tester', streetAddress, '', city, state, zip, phoneNumber);
         await accountSettings.verifyAddressSaved(streetAddress, city);
     });
 
-
-    test('Sign in to newly created account', async ({ page }) => {
+    test('Create new Account and change Contact information', async ({ page }) => {
         const homePage = new HomePage(page);
         const accountSettings = new AccountSettings(page);
         await homePage.clickSignInButton();
-        await homePage.loginToAccount(testEmail, testPassword);
+        await homePage.clickCreateAccountButton();
+        await homePage.fillOutNewAccountForm('Tester', 'Tester', faker.internet.email({provider: 'fakeemail.com'}), faker.internet.password());
+        
         await accountSettings.clickToAccountsettings();
+
+        const newFirstName = faker.person.firstName();
+        const newLastName = faker.person.lastName();
+        const newEmail = faker.internet.email({provider: 'fakeemail.com'});
+        const newPhone = faker.phone.number();
+
+        await accountSettings.editContactInfo(newFirstName, newLastName, newEmail, newPhone);
+        await accountSettings.verifyContactInfoSaved(newFirstName, newLastName);
+        
     });
+
 });

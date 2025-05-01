@@ -28,4 +28,18 @@ test.describe('Account Settings', () => {
         await accountSettings.goto();
     });
         
+/*Below are additional  tests cases that could also be written as per the instructions under the account settings pages:
+
+1. Payment Methods:
+1.1 Add a payment method
+1.2 Edit a payment method
+1.3 Delete a payment method
+2. View order history and sorting options (will require seed data)
+3. View and create List items
+4. View, edit and delete subscriptions
+5. Search for a demonstrator (ideally have seed date setup or created)
+6. Join Stampin' rewards
+
+*/
+
 });
