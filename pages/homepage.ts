@@ -1,4 +1,5 @@
 import { Page, expect, Locator } from '@playwright/test';
+import { logTestAccount } from '../utils/accountLogger';
 
 export class HomePage {
     private readonly page: Page;
@@ -13,6 +14,8 @@ export class HomePage {
     submitButton: Locator;
     passwordLogin: Locator;
     submitLogin: Locator;
+    maybeLaterButton: Locator;
+    closeOptOutRewardsModal: Locator;
 
 
     constructor(page: Page) {
@@ -28,6 +31,8 @@ export class HomePage {
         this.emailLogin = this.page.getByTestId('auth-email');
         this.passwordLogin = this.page.getByTestId('form-auth').getByText('Password', { exact: true });
         this.submitLogin = this.page.getByTestId('auth-submit');
+        this.maybeLaterButton = this.page.getByRole('button', { name: 'Maybe Later' });
+        this.closeOptOutRewardsModal = this.page.getByTestId('confirm-dialog').locator('button').filter({ hasText: 'Close' });
     }
 
     async goto(){
@@ -49,6 +54,10 @@ export class HomePage {
         await this.passwordInput.fill(password);
         await this.passwordConfirmationInput.fill(password);
         await this.submitButton.click();
+        logTestAccount(email, password);
+        await this.maybeLaterButton.click();
+        await this.closeOptOutRewardsModal.click();
+
     }
 
     async loginToAccount(email: string, password: string) {

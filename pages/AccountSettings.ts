@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export class AccountSettings {
 
@@ -16,13 +16,21 @@ export class AccountSettings {
     zip: Locator;
     phoneNumber: Locator;
     defaultAddress: Locator;
+    USState: Locator;
+    addressSaveButton: Locator;
+    savedAddressLine1: Locator;
+    savedCityStateZipCode: Locator;
+
+    savedPhoneNumber: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.accountName = this.page.getByTestId('menu-user-firstname');
         this.accountSettings = this.page.getByRole('menuitem', { name: 'Account Settings' });
-        this.addresses = this.page.getByRole('menuitem', { name: 'Addresses' });
+        this.addresses = this.page.getByRole('link', { name: 'Addresses' });
         this.paymentMethods = this.page.getByRole('menuitem', { name: 'Payment' });
+
+        //Address fields
         this.shippingFirstName = this.page.getByTestId('address-field-first-name');
         this.shippingLastName = this.page.getByTestId('address-field-last-name');
         this.addressLine1 = this.page.getByTestId('address.addressLine1');
@@ -32,6 +40,12 @@ export class AccountSettings {
         this.zip = this.page.getByTestId('address-field-postalCode');
         this.phoneNumber = this.page.getByTestId('address-telephone');
         this.defaultAddress = this.page.getByTestId('address-default')
+        this.USState = this.page.getByRole('option').locator('div').first()
+        this.addressSaveButton = this.page.getByTestId('address-save');
+        this.savedAddressLine1 = this.page.getByTestId('addresslist-row-1')
+        this.savedCityStateZipCode = this.page.getByTestId('addresslist-row-2')
+        this.savedPhoneNumber = this.page.getByTestId('addresslist-item-phone')
+
 
     }
 
@@ -57,8 +71,16 @@ export class AccountSettings {
         }
         await this.city.fill(city);
         await this.state.fill(state);
+        await this.USState.click();
         await this.zip.fill(zip);
         await this.phoneNumber.fill(phoneNumber);
+        // Use force: true to bypass the ripple effect overlay
+        await this.defaultAddress.check({ force: true });
+        await this.addressSaveButton.click();
     }
 
+    async verifyAddressSaved(addressLine1: string, cityStateZipcode: string){
+        await expect(this.savedAddressLine1).toHaveText(addressLine1);
+        await expect(this.savedCityStateZipCode).toContainText(cityStateZipcode);
+    }
 }

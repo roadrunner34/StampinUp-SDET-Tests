@@ -5,6 +5,8 @@ The following are bugs and notes found while testing and creating this test suit
 2. All the data-testid's for the different sections under the account name are the same, "account-link"
 3. There is no validation for creating an account with a random email.  It seems that as long as I use a @someword.com format it will create the account. 
 4. testId for the state dropdown needs to be updated to be more specific, currently it's ('autocomplete-field-div').
+5. The state dropdown, when entering in a state abbreviation should show that abbreviation's result first, then other results.  For example Louisiana (LA) brings up Alaska first.  
+    5.1. Alternatively, the zipcode should be first, at which point, the state and city can be determined automatically. 
 
 
 ## Notes

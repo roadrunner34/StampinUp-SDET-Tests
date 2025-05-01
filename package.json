@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@faker-js/faker": "^9.7.0",
     "@playwright/test": "^1.52.0",
     "@types/axios": "^0.14.0",
     "@types/node": "^22.15.3",
@@ -11,6 +12,7 @@
   "dependencies": {
     "@types/axios": "^0.9.36",
     "axios": "^1.9.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "faker": "^5.5.3"
   }
 }
