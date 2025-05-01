@@ -12,7 +12,7 @@ The following are bugs and notes found while testing and creating this test suit
 
 
 ## Notes
- - I would  normally have a backend call done to delete the users after the tests are run, but I don't have access for that and will just inform you of any users I've created that need to be deleted. (See Below)
+ - I would  normally have a backend call done to delete the users after the tests are run, but I don't have access for that and will just inform you of any users I've created that need to be deleted. See test_accounts.log.
  
 
 
